@@ -27,6 +27,9 @@ exports.create = (req, res) => {
   });
 };
 
+
+
+
 // Retrieve all Admin from the database.
 exports.findAll = (req, res) => {
   Admin.getAll((err, data) => {
