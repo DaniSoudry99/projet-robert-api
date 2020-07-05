@@ -16,7 +16,7 @@ module.exports = app => {
     // Delete a Etat with etatId
     app.delete("/etat/:etatId", etat.delete);
   
-    // Create a new Etat
+    // Delete all Etat
     app.delete("/etat", etat.deleteAll);
   };
   

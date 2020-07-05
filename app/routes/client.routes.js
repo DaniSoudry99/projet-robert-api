@@ -16,7 +16,7 @@ module.exports = app => {
     // Delete a Client with clientId
     app.delete("/client/:clientId", client.delete);
   
-    // Create a new Client
+    // Delete all Client
     app.delete("/client", client.deleteAll);
   };
   

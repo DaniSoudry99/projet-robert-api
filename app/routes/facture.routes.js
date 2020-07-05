@@ -16,7 +16,7 @@ module.exports = app => {
     // Delete a Facture with factureId
     app.delete("/facture/:factureId", facture.delete);
   
-    // Create a new Facture
+    // Delete all Facture
     app.delete("/facture", facture.deleteAll);
   };
   

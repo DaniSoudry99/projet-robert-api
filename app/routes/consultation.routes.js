@@ -16,7 +16,7 @@ module.exports = app => {
     // Delete a Consultation with consultationId
     app.delete("/consultation/:consultationId", consultation.delete);
   
-    // Create a new Consultation
+    // Delete all Consultation
     app.delete("/consultation", consultation.deleteAll);
   };
   

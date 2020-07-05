@@ -16,7 +16,7 @@ module.exports = app => {
     // Delete a Consultant with consultantId
     app.delete("/consultant/:consultantId", consultant.delete);
   
-    // Create a new Consultant
+    // Delete all Consultant
     app.delete("/consultant", consultant.deleteAll);
   };
   
