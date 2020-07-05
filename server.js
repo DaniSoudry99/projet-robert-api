@@ -18,6 +18,8 @@ require("./app/routes/etat.routes.js")(app);
 require("./app/routes/client.routes.js")(app);
 require("./app/routes/consultant.routes.js")(app);
 require("./app/routes/admin.routes.js")(app);
+require("./app/routes/consultation.routes.js")(app);
+require("./app/routes/facture.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
