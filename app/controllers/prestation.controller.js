@@ -84,7 +84,7 @@ exports.update = (req, res) => {
   );
 };
 
-// Delete a Prestation with the specified etatId in the request
+// Delete a Prestation with the specified prestationId in the request
 exports.delete = (req, res) => {
   Prestation.remove(req.params.prestationId, (err, data) => {
     if (err) {
@@ -94,7 +94,7 @@ exports.delete = (req, res) => {
         });
       } else {
         res.status(500).send({
-          message: "Could not delete Etat with id " + req.params.prestationId
+          message: "Could not delete prestation with id " + req.params.prestationId
         });
       }
     } else res.send({ message: `prestation was deleted successfully!` });

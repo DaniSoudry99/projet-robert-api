@@ -2,11 +2,11 @@ const sql = require("./prestation.js");
 
 // constructor
 const Prestation = function(prestation) {
-  this.nomPrestation = prestation.nomPrestation;
+  this.libellePrestation = prestation.libellePrestation;
 };
 
-prestation.create = (newEtat, result) => {
-  sql.query("INSERT INTO etat SET ?", newPrestation, (err, res) => {
+Prestation.create = (newPrestation, result) => {
+  sql.query("INSERT INTO prestation SET ?", newPrestation, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -19,7 +19,7 @@ prestation.create = (newEtat, result) => {
 };
 
 Prestation.findById = (prestationId, result) => {
-  sql.query(`SELECT * FROM etat WHERE idprestation = ${prestationId}`, (err, res) => {
+  sql.query(`SELECT * FROM prestation WHERE idPrestation = ${prestationId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -50,10 +50,10 @@ Prestation.getAll = result => {
   });
 };
 
-Prestation.updateById = (id, etat, result) => {
+Prestation.updateById = (id, prestation, result) => {
   sql.query(
-    "UPDATE etat SET nomPrestation = ? WHERE idprestation = ?",
-    [etat.nomPrestation, id],
+    "UPDATE prestation SET libellePrestation = ? WHERE idPrestation = ?",
+    [prestation.libellePrestation, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -62,7 +62,7 @@ Prestation.updateById = (id, etat, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Etat with the id
+        // not found prestation with the id
         result({ kind: "not_found" }, null);
         return;
       }
@@ -74,7 +74,7 @@ Prestation.updateById = (id, etat, result) => {
 };
 
 Prestation.remove = (id, result) => {
-  sql.query("DELETE FROM etat WHERE idprestation= ?", id, (err, res) => {
+  sql.query("DELETE FROM prestation WHERE idPrestation= ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -105,4 +105,4 @@ Prestation.removeAll = result => {
   });
 };
 
-module.exports = prestation;
+module.exports = Prestation;
