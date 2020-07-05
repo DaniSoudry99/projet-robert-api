@@ -16,7 +16,7 @@ module.exports = app => {
     // Delete a Admin with adminId
     app.delete("/admin/:adminId", admin.delete);
   
-    // Create a new Admin
+    // Delete all Admin
     app.delete("/admin", admin.deleteAll);
   };
   
