@@ -56,6 +56,37 @@ Consultant.findById = (consultantId, result) => {
     });
 };
 
+Consultant.findByNom = (nomConsultant, passwordConsultant, result) => {
+    sql.query(`SELECT * FROM consultant WHERE nomConsultant = '${nomConsultant}'`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found consultant: ", res[0]);
+
+            // Si le mot de passe est bon :
+            if(passwordHash.verify(passwordConsultant, res[0].passwordConsultant)) {
+                result(null, res[0]);
+                return;
+            }
+            else {
+                console.log("Mot de passe incorect: ", res[0]);
+                result(null);
+                return;
+            }                  
+            
+        }
+        else {
+            console.log("Consultant introuvable: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+    });
+};
+
 Consultant.getAll = result => {
     sql.query("SELECT * FROM consultant", (err, res) => {
         if (err) {

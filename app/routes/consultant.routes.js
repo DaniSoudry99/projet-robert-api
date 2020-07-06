@@ -6,6 +6,8 @@ module.exports = app => {
     
     // Retrieve all Consultant
     app.get("/consultant", consultant.findAll);
+
+    app.post("/consultant/login", consultant.login);
   
     // Retrieve a single Consultant with consultantId
     app.get("/consultant/:consultantId", consultant.findOne);

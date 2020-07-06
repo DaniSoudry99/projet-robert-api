@@ -56,6 +56,24 @@ exports.findOne = (req, res) => {
   });
 };
 
+// Find a single Consultant with a nomConsultant
+exports.login = (req, res) => {
+  Consultant.findByNom(req.body.nomConsultant, req.body.passwordConsultant, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(201).send({
+          message: `Not found Consultant with id ${req.params.nomConsultant}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Consultant with id " + req.params.nomConsultant
+        });
+      }
+    } else res.send(data);
+  });
+  
+};
+
 // Update a Consultant identified by the consultantId in the request
 exports.update = (req, res) => {
   // Validate Request
