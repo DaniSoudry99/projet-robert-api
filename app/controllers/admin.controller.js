@@ -56,6 +56,26 @@ exports.findOne = (req, res) => {
   });
 };
 
+// Find a single Admin with a nomAdmin
+exports.login = (req, res) => {
+  console.log(req.body);
+  
+  Admin.findByNom(req.body.nomAdmin, req.body.passwordAdmin, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(201).send({
+          message: `Not found Admin with id ${req.params.nomAdmin}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Admin with id " + req.params.nomAdmin
+        });
+      }
+    } else res.send(data);
+  });
+  
+};
+
 // Update a Admin identified by the adminId in the request
 exports.update = (req, res) => {
   // Validate Request

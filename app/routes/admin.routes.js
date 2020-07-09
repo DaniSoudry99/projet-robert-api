@@ -6,6 +6,8 @@ module.exports = app => {
     
     // Retrieve all Admin
     app.get("/admin", admin.findAll);
+
+    app.post("/admin/login", admin.login);
   
     // Retrieve a single Admin with adminId
     app.get("/admin/:adminId", admin.findOne);

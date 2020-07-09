@@ -11,7 +11,7 @@ module.exports = app => {
   
     // Retrieve a single Consultant with consultantId
     app.get("/consultant/:consultantId", consultant.findOne);
-  
+
     // Update a Consultant with consultantId
     app.put("/consultant/:consultantId", consultant.update);
   

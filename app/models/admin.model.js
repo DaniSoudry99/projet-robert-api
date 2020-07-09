@@ -56,6 +56,37 @@ Admin.findById = (adminId, result) => {
     });
 };
 
+Admin.findByNom = (nomAdmin, passwordAdmin, result) => {
+    sql.query(`SELECT * FROM administrateur WHERE nomAdmin = '${nomAdmin}'`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found admin: ", res[0]);
+
+            // Si le mot de passe est bon :
+            if(passwordHash.verify(passwordAdmin, res[0].passwordAdmin)) {
+                result(null, res[0]);
+                return;
+            }
+            else {
+                console.log("Mot de passe incorect: ", res[0]);
+                result(null);
+                return;
+            }                  
+            
+        }
+        else {
+            console.log("admin introuvable: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+    });
+};
+
 Admin.getAll = result => {
     sql.query("SELECT * FROM administrateur", (err, res) => {
         if (err) {
