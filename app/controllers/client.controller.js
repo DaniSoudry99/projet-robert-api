@@ -19,10 +19,10 @@ exports.create = (req, res) => {
   // Save Client in the database
   Client.create(client, (err, data) => {
     if (err)
-      res.status(500).send({
+      res.status(201).send({
         message:
-          err.message || "Some error occurred while creating the Client."
-      });
+          err.message || "Erreur, eMail non valide"
+      }); 
     else res.send(data);
   });
 };
@@ -73,12 +73,12 @@ exports.update = (req, res) => {
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
-          res.status(404).send({
+          res.status(201).send({
             message: `Not found Client with id ${req.params.clientId}.`
           });
         } else {
-          res.status(500).send({
-            message: "Error updating Client with id " + req.params.clientId
+          res.status(201).send({
+            message: "Adresse eMail invalide"
           });
         }
       } else res.send(data);
