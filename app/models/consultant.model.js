@@ -95,6 +95,10 @@ Consultant.getAll = result => {
             return;
         }
 
+
+
+
+        
         console.log("Consultant: ", res);
         result(null, res);
     });
