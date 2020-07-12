@@ -19,9 +19,9 @@ exports.create = (req, res) => {
   // Save Consultant in the database
   Consultant.create(consultant, (err, data) => {
     if (err)
-      res.status(500).send({
+      res.status(201).send({
         message:
-          err.message || "Some error occurred while creating the consultant."
+          err.message || "Erreur, eMail non valide"
       });
     else res.send(data);
   });
@@ -91,12 +91,12 @@ exports.update = (req, res) => {
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
-          res.status(404).send({
+          res.status(201).send({
             message: `Not found Consultant with id ${req.params.consultantId}.`
           });
         } else {
-          res.status(500).send({
-            message: "Error updating Consultant with id " + req.params.consultantId
+          res.status(201).send({
+            message: "Adresse eMail invalide"
           });
         }
       } else res.send(data);
