@@ -38,7 +38,7 @@ Prestation.findById = (prestationId, result) => {
 };
 
 Prestation.getAll = result => {
-  sql.query("SELECT * FROM prestation", (err, res) => {
+  sql.query("SELECT * FROM prestation ORDER BY libellePrestation", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

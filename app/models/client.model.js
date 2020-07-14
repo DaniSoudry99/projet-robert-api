@@ -53,7 +53,7 @@ Client.findById = (clientId, result) => {
 };
 
 Client.getAll = result => {
-  sql.query("SELECT * FROM client", (err, res) => {
+  sql.query("SELECT * FROM client ORDER BY nomClient", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

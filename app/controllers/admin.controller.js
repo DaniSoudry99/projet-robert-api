@@ -59,7 +59,7 @@ exports.findOne = (req, res) => {
 // Find a single Admin with a nomAdmin
 exports.login = (req, res) => {
   console.log(req.body);
-  
+
   Admin.findByNom(req.body.nomAdmin, req.body.passwordAdmin, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {

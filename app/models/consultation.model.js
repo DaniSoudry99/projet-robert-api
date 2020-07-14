@@ -48,6 +48,27 @@ Consultation.findById = (consultationId, result) => {
   });
 };
 
+Consultation.findByIdAll = (consultantId, result) => {
+  sql.query(`SELECT idConsultation, date, nomClient, libellePrestation 
+            FROM consultation, client, prestation 
+            WHERE prestation.idPrestation = consultation.idPrestation AND client.idClient = consultation.idClient AND idConsultant = ${consultantId} ORDER BY date`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found consultation: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Consultation with the id
+    result({ kind: "not_found" }, null);
+  });
+};
+
 Consultation.getAll = result => {
   sql.query("SELECT * FROM consultation", (err, res) => {
     if (err) {

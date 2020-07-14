@@ -9,6 +9,8 @@ module.exports = app => {
   
     // Retrieve a single Consultation with consultationId
     app.get("/consultation/:consultationId", consultation.findOne);
+
+    app.post("/consultationDonnee", consultation.findConsultant);
   
     // Update a Consultation with consultationId
     app.put("/consultation/:consultationId", consultation.update);
