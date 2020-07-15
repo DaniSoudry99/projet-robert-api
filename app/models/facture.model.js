@@ -57,6 +57,82 @@ Facture.getAll = result => {
   });
 };
 
+Facture.getAllInfo = result => {
+  sql.query(
+    "select DISTINCT idFacture, facture.numeroFacture, dateFacture, etat.nomEtat, nomConsultant, nomClient from facture, consultation, etat, consultant, client where facture.numeroFacture = consultation.numeroFacture AND etat.idEtat = facture.idEtat and consultant.idConsultant = consultation.idConsultant and client.idClient = consultation.idClient order by dateFacture desc", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("facture: ", res);
+    result(null, res);
+  });
+};
+
+Facture.getInfoFacture = (factureId, result) => {
+  sql.query(
+    "select adresse, nomClient, mailClient, dateFacture, facture.numeroFacture, etat.nomEtat from facture, consultation, etat, consultant, client where facture.numeroFacture = consultation.numeroFacture AND etat.idEtat = facture.idEtat and consultant.idConsultant = consultation.idConsultant and client.idClient = consultation.idClient and idFacture = ?",
+    [factureId],
+    (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("facture: ", res);
+    result(null, res);
+  });
+};
+
+Facture.factureAFaireSql = (result) => {
+  sql.query(
+    "select distinct idClient from consultation where numeroFacture = 'FA0000'",
+    (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("facture: ", res);
+    result(null, res);
+  });
+};
+
+Facture.factureMaxSql = (result) => {
+  sql.query(
+    "select max(numeroFacture) as max from consultation",
+    (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("facture: ", res);
+    result(null, res);
+  });
+};
+
+Facture.getInfoConsultationClient = (numeroFacture, result) => {
+  sql.query(
+    "select date, duree, nomConsultant, libellePrestation, montant from consultation, consultant, prestation where consultation.idConsultant = consultant.idConsultant and consultation.idPrestation = prestation.idPrestation and numeroFacture = ?", 
+    [numeroFacture],
+    (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("facture: ", res);
+    result(null, res);
+  });
+};
+
 Facture.updateById = (id, facture, result) => {
 
     sql.query(

@@ -6,6 +6,16 @@ module.exports = app => {
     
     // Retrieve all Facture
     app.get("/facture", facture.findAll);
+
+    app.get("/factureInfo", facture.findInfo);
+
+    app.get("/laFactureInfo/:factureId", facture.findInfoFacture);
+
+    app.get("/laFactureInfo2/:numeroFacture", facture.findInfoLaFacture);
+
+    app.get("/factureAFaire", facture.factureAFaire);
+
+    app.get("/factureMax", facture.factureMax);
   
     // Retrieve a single Facture with factureId
     app.get("/facture/:factureId", facture.findOne);

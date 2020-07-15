@@ -41,6 +41,66 @@ exports.findAll = (req, res) => {
   });
 };
 
+// Info à afficher :
+exports.findInfo = (req, res) => {
+  Facture.getAllInfo((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving facture."
+      });
+    else res.send(data);
+  });
+};
+
+// Info à afficher :
+exports.findInfoFacture = (req, res) => {
+  Facture.getInfoFacture(req.params.factureId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving facture."
+      });
+    else res.send(data);
+  });
+};
+
+// Facture à faire :
+exports.factureAFaire = (req, res) => {
+  Facture.factureAFaireSql((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving facture."
+      });
+    else res.send(data);
+  });
+};
+
+// Facture Max :
+exports.factureMax = (req, res) => {
+  Facture.factureMaxSql((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving facture."
+      });
+    else res.send(data);
+  });
+};
+
+// Info à afficher pour une facture :
+exports.findInfoLaFacture = (req, res) => {
+  Facture.getInfoConsultationClient(req.params.numeroFacture, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving facture."
+      });
+    else res.send(data);
+  });
+};
+
 // Find a single Facture with a factureId
 exports.findOne = (req, res) => {
   Facture.findById(req.params.factureId, (err, data) => {
