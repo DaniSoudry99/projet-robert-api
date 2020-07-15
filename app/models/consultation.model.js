@@ -51,7 +51,7 @@ Consultation.findById = (consultationId, result) => {
 Consultation.findByIdAll = (consultantId, result) => {
   sql.query(`SELECT idConsultation, date, nomClient, libellePrestation 
             FROM consultation, client, prestation 
-            WHERE prestation.idPrestation = consultation.idPrestation AND client.idClient = consultation.idClient AND idConsultant = ${consultantId} ORDER BY date`, (err, res) => {
+            WHERE prestation.idPrestation = consultation.idPrestation AND client.idClient = consultation.idClient AND idConsultant = ${consultantId} ORDER BY date DESC`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
