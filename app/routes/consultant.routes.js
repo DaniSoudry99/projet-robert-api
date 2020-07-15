@@ -8,6 +8,8 @@ module.exports = app => {
     app.get("/consultant", consultant.findAll);
 
     app.post("/consultant/login", consultant.login);
+
+    app.post("/consultant/recap", consultant.recap);
   
     // Retrieve a single Consultant with consultantId
     app.get("/consultant/:consultantId", consultant.findOne);

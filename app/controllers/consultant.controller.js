@@ -56,7 +56,7 @@ exports.findOne = (req, res) => {
   });
 };
 
-// Find a single Consultant with a nomConsultant
+// Login du consultant
 exports.login = (req, res) => {
   Consultant.findByNom(req.body.nomConsultant, req.body.passwordConsultant, (err, data) => {
     if (err) {
@@ -67,6 +67,24 @@ exports.login = (req, res) => {
       } else {
         res.status(500).send({
           message: "Error retrieving Consultant with id " + req.params.nomConsultant
+        });
+      }
+    } else res.send(data);
+  });
+  
+};
+
+// Recapitulatif
+exports.recap = (req, res) => {
+  Consultant.findRecap(req.body.consultantId, req.body.clientId, req.body.date, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(201).send({
+          message: `Pas de Récapitulatif`
+        });
+      } else {
+        res.status(500).send({
+          message: "Pas de Récapitulatif"
         });
       }
     } else res.send(data);

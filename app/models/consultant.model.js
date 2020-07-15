@@ -56,6 +56,25 @@ Consultant.findById = (consultantId, result) => {
     });
 };
 
+Consultant.findRecap = (consultantId, clientId, date, result) => {
+    sql.query(`select count(idConsultation) as compte, sum(montant) as somme from consultation where idConsultant = ${consultantId} and date like '${date}%' and idClient = ${clientId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("Récapitulatif prêt");
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Consultant with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
 Consultant.findByNom = (nomConsultant, passwordConsultant, result) => {
     sql.query(`SELECT * FROM consultant WHERE nomConsultant = '${nomConsultant}'`, (err, res) => {
         if (err) {
